@@ -1,0 +1,70 @@
+<mat-card class="container">
+  <mat-card-content>
+    <form class="ms-5" (submit)="updatePost()">
+      <h1>Add Post here....</h1>
+      {{postDet | json}}
+      <p>
+        <label><i>Enter Title</i></label><br>
+        <mat-form-field style="width: 80%;" appearance="fill">
+          <mat-label>Enter Title ...</mat-label>
+          <input name="title" matInput [(ngModel)]="postDet.title" [value]="postDet.title"
+            placeholder="Enter title">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+      </p>
+      <p>
+        <label><i>Enter Content</i></label><br>
+
+        <editor
+        [(ngModel)]="postDet.content"
+          name="Content"
+          style="width: 80%;"
+          [init]="{
+          height: 350,
+          menubar: false,
+          plugins: [
+          'advlist autolink lists link image charmap print preview anchor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table paste code help wordcount'
+          ],
+          toolbar:
+          'undo redo | formatselect | bold italic backcolor | \
+          alignleft aligncenter alignright alignjustify | \
+          bullist numlist outdent indent | removeformat | help'
+          }"></editor>
+      </p>
+
+      <div class="input-group">
+        <div style="width: 80%;">
+          <mat-label><i>Upload Image</i></mat-label>
+          <br>
+          <img [src]="src" style="max-width:40% ;margin-bottom: 10px;"
+            class="rounded-circle img-responsive
+            border border-5 " />
+          <input accept="image/*" type="file" (change)="handlePimage($event)"
+            class="form-control " id="inputGroupFile04"
+            aria-describedby="inputGroupFileAddon04"
+            aria-label="Upload">
+        </div>
+      </div><br>
+      <label class="">Select a Category</label>
+      <div class="input-group mb-3 " style="width: 80%;">
+        <label class="input-group-text" for="inputGroupSelect01">Options</label>
+        <select class="form-select" [(ngModel)]="postDet.ctgry" name="ctgry" id="inputGroupSelect01">
+          <option selected disabled>Select</option><hr>
+          <option class="text-uppercase"  *ngFor="let c of ctgris"
+            [value]="c.id">
+            {{c.title.toUpperCase()}}</option>
+
+        </select>
+      </div>
+
+
+
+      <button type="submit" mat-raised-button color="primary"
+        style="width: 7rem;">Add Post</button>
+      <button type="reset" class="ms-3" mat-raised-button
+        color="accent" style="width: 7rem;">Reset</button>
+    </form>
+  </mat-card-content>
+</mat-card>

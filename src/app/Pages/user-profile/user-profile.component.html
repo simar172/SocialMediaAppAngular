@@ -1,0 +1,123 @@
+<mat-card class="container">
+  <mat-card-content>
+    <div class="card mr-3 ml-3 table-responsive">
+      <div class="card-body">
+        <h1 align="right">
+          <span class="badge text-bg-primary">{{user && user.set[0].name}}</span>
+        </h1>
+        <div class="container text-center">
+          <img class="rounded-pill"
+            [src]="'http://localhost:8080/profile/image/'+user.imagename+'/'+user.email"
+            style="width: 40%; border: 10px solid green;"> <br> <br>
+          <h1 class="text-uppercase uname"></h1>
+          <br> <br>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="row">ID</th>
+                <td class="text-uppercase">{{user.id}}</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Name</th>
+                <td class="text-uppercase">{{user.name}}</td>
+              </tr>
+
+
+              <tr>
+                <th scope="col">Email</th>
+                <td class="">{{user.email}}</td>
+              </tr>
+
+              <tr>
+                <th scope="col">About</th>
+                <td class="">{{user.about}}</td>
+              </tr>
+              <tr>
+                <th mat-icon-button class=""><span>Followers</span></th>
+                <td class="dropup">
+                  <button mat-icon-button class="
+                    dropdown-toggle "
+                    role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false"><b>{{flwr.length}}
+                      Follower</b></button>
+                  <ul class="dropdown-menu dropup">
+                    <h1 class="container" align="left"><b>
+                        Follower</b></h1>
+                    <li>
+                      <p class="dropdown-item ">
+                        <li>
+                          <ul>
+                            <p *ngIf="flwr.length==0">No Followers!!</p>
+                            <li *ngFor="let f of flwr">
+                              <img class="rounded-circle" style="max-height:
+                                40px;border: solid rgb(69,
+                                174, 69);cursor: pointer;width: 3rem;height:
+                                3rem;"
+                                src="http://localhost:8080/profile/image/{{f.imagename}}/{{f.email}}">
+                              <span class="fs-4"
+                                [routerLink]="'/user/profile/'+f.id">&nbsp;{{f.name}}</span><br>
+                              <i style="margin-left: 50px;">&nbsp;{{f.email}}</i>
+                              <br>
+                              <br>
+                            </li>
+                          </ul>
+                        </li>
+                      </p>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <th scope="col">Following</th>
+                <td class="dropup ">
+                  <button mat-icon-button class="
+                    dropdown-toggle "
+                    role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false"><b>{{flwng.length}}
+                      Following</b></button>
+                  <ul class="dropdown-menu dropup">
+                    <h1 class="container" align="left"><b>
+                        Following</b></h1>
+                    <li>
+                      <p class="dropdown-item ">
+                        <li>
+                          <ul>
+                            <p *ngIf="flwng.length==0">No Following!!</p>
+                            <li *ngFor="let f of flwng">
+                              <img class="rounded-circle" style="max-height:
+                                40px;border: solid rgb(69,
+                                174, 69);cursor: pointer;width: 3rem;height:
+                                3rem;"
+                                src="http://localhost:8080/profile/image/{{f.imagename}}/{{f.email}}">
+                              <span class="fs-4"
+                                [routerLink]="'/user/profile/'+f.id">&nbsp;{{f.name}}</span><br>
+                              <i style="margin-left: 50px;">&nbsp;{{f.email}}</i>
+                            </li>
+                          </ul>
+                        </li>
+                      </p>
+                    </li>
+
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <span matTooltip="You must Login to Follow"
+            [matTooltipDisabled]="isLogin">
+            <button *ngIf="cuid!=user.id"
+              class="btn btn-outline-dark
+              {{isLogin==true?'':'disabled'}}"
+              (click)="fUser(cuid,user.id)">{{isflwng?"Follwing":"Follow"}}
+            </button>
+          </span>
+
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<app-user-post></app-user-post>

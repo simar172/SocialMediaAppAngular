@@ -1,0 +1,37 @@
+<div class="container mt-5">
+  <span class="badge text-bg-dark fs-1">All your Posts...</span>
+</div>
+<div class="container ">
+  <div class="card mt-5" *ngFor="let p of post">
+    <img
+      style="max-height: 40rem;"
+      src="http://localhost:8080/api/post/show/{{p.imagename}}/{{p.u.email}}"
+      class="card-img-top" alt="...">
+    <div class="card-body">
+      <h1 class="card-title">{{p.title}}</h1>
+
+      <p class="card-text " [innerHTML]="p.content.substring(0,700)"></p>
+      <button mat-raised-button [routerLink]="'/full/'+p.id"
+        color="accent">Read More...</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- <mat-card class="container mt-4" *ngFor="let p of post">
+  <mat-card-content>
+    <div class=" " style="width: 80rem;">
+      <img
+        style="max-height: 40rem;"
+        src="http://localhost:8080/api/post/show/{{p.imagename}}/{{p.u.email}}"
+        class="card-img-top" alt="...">
+      <div class="card-body"><hr>
+        <h1 class="card-title">{{p.title}}</h1>
+        <p class="card-text " [innerHTML]="p.content.substring(0,700)"></p>
+        <span (click)="addLike(p.u.id,p.id)"><mat-icon style="font-size: 40px;">favorite</mat-icon></span><br>
+        <button mat-raised-button [routerLink]="'/full/'+p.id"
+          color="accent">Read More...</button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card> -->

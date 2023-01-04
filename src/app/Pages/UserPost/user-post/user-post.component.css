@@ -1,0 +1,8 @@
+@media screen and (max-width: 1170px) {
+  .imgs {
+    height: 10rem;
+    width: 15rem;
+    margin-top: 5px;
+  }
+}
+

@@ -1,0 +1,19 @@
+@media screen and (max-width: 1170px) {
+  .imgs {
+    margin-top: 5px;
+  }
+  .dots {
+    margin-left: 40 px;
+  }
+}
+#out:hover {
+  transition: 0.2s;
+  transform: scale(1.045);
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media (min-width: 1180px) {
+  .pdg {
+    padding: 5rem;
+  }
+}

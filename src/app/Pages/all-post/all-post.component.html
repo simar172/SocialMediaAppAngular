@@ -1,0 +1,90 @@
+
+<div class="container-fluid">
+  <div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-2">
+          <app-categories></app-categories>
+        </div>
+        <div class="col-md-10 crd pdg">
+          <div align="left" class="ms-4">
+            <p class=""> <span class="badge text-bg-dark fs-1 ">All Posts...</span></p>
+          </div>
+          <div class="card m-4 " id="out" *ngFor="let p of posts;let i=index;">
+            <img style="max-height: 30rem"
+              src="http://localhost:8080/api/post/show/{{p?.imagename}}/{{p.u?.email}}"
+              class="card-img-top imgs" alt="...">
+            <div class="card-body"><hr>
+              <h1 class="card-title">{{p.title}}</h1>
+              <p class="card-text ings"
+                [innerHTML]="p.content.substring(0,2000)"></p>
+              <span (click)="addLike(userid,p.id)"><mat-icon style="font-size:
+                  40px;">{{p.lkd===true ?'favorite':'favorite_border'}}</mat-icon></span><br>
+              <div class="dropup">
+                <button mat-icon-button class="fs-5 ms-lg-2 nav-link dots
+                  dropdown-toggle " mat-icon-button (click)="getlUsers(i)"
+                  role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false"><b>{{p.lkn}}
+                    Likes</b></button>
+                <ul class="dropdown-menu dropup">
+                  <h1 class="container" align="left"><b>{{puser.length}}
+                      Likes</b></h1>
+                  <li *ngFor="let u of puser">
+                    <p class="dropdown-item ">
+                      <li>
+                        <ul>
+                          <li [routerLink]="'/user/profile/'+u.id" style="cursor: pointer;">
+                            <img class="rounded-circle" style="max-height:
+                              40px;border: solid rgb(69,
+                              174, 69);cursor: pointer;width: 3rem;height:
+                              3rem;"
+                              src="http://localhost:8080/profile/image/{{u.imagename}}/{{u.email}}">
+                            <span class="fs-4"
+                              >&nbsp;{{u.name}}</span><br>
+                            <i style="margin-left: 50px;">&nbsp;{{u.email}}</i>
+                          </li>
+                        </ul>
+                      </li>
+                    </p>
+                  </li>
+
+                </ul>
+              </div>
+              <div class="nav-item dropdown d-block">
+                <div class="row">
+                  <div class="col-lg-1 col-7 col-md-3">
+                    <button mat-raised-button [routerLink]="'/full/'+p.id"
+                      color="accent">See full post...</button>
+
+                  </div>
+                  <div class="col-lg-11 col-md-7 col-6 dropup">
+                    <button mat-icon-button class=" ms-lg-2 nav-link dots
+                      dropdown-toggle "
+                      role="button"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li *ngIf="userid==p.u.id && islogin"><a
+                          class="dropdown-item
+                          {{userid!=p.u.id?'disabled':''}}"
+                          (click)="deletePost(p.id)">Delete</a></li>
+                      <li *ngIf="userid==p.u.id && islogin"><a
+                          class="dropdown-item
+                          {{userid!=p.u.id?'disabled':''}}"
+                          [routerLink]="'/update/'+p.id">Update
+                          post</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

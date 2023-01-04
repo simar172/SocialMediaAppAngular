@@ -1,0 +1,56 @@
+<mat-toolbar class="navbar fixed-top navbar-expand-lg navbar-dark" color="accent"
+  style="border-bottom-left-radius:50px;border-bottom-right-radius:50px
+  ;box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0,
+  0.19);">
+  <div class="container-fluid">
+    <h1 class="navbar-brand fs-4 me-2" [routerLink]="''" style="cursor: pointer">Blogs </h1>
+    <div align="center">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page"
+            [routerLink]="'/user/home/'+fulluser.id">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active">Disabled</a>
+        </li>
+      </ul>
+      <div class="d-flex ">
+
+        <a *ngIf="!islin" [routerLink]="'/login'" class="navbar-brand">Login</a>
+        <a *ngIf="!islin" [routerLink]="'/signup'" class="navbar-brand">SignUp</a>
+        <button *ngIf="islin" mat-icon-button class="navbar-brand ml-3 me-5"
+          (click)="onLogout()"><h3>LogOut</h3></button>
+
+        <a *ngIf="islin" class="navbar-brand text-uppercase"
+          [routerLink]="'/user'"> Welcome {{user}} </a>
+        <img *ngIf="islin" [routerLink]="'/user/profile/'+fulluser.id"
+          [src]="'http://localhost:8080/profile/image/'+fulluser.imagename+'/'+fulluser.email"
+          style="max-height: 40px;border-radius: 100px;border: solid rgb(69,
+          174, 69);cursor: pointer;" class="">
+      </div>
+    </div>
+  </div>
+</mat-toolbar>

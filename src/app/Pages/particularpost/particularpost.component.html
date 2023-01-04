@@ -1,0 +1,51 @@
+<form (submit)="acomment()">
+  <mat-card class="container">
+
+    <mat-card-content>
+
+      <div class="col-md-10 ms-5">
+
+        <h1 class="card-title fs-1"><u>{{particularPost.title}}</u></h1>
+        <div class="d-flex justify-content-center">
+          <img
+            src="http://localhost:8080/api/post/show/{{particularPost.imagename}}/{{particularPost.u.email}}"
+            class="card-img-top " alt="...">
+        </div><hr>
+        <div class="card-body">
+          <p class="card-text " [innerHTML]="particularPost.content"></p>
+          <br>
+          <br>
+          <h2 align="right">Posted by <b><a
+                [routerLink]="'/user/profile/'+particularPost.u.id">
+                {{particularPost.u.name}}</a><br>
+              on {{ particularPost.date| date : 'yyyy-MM-dd'}}
+            </b></h2>
+        </div>
+        <br>
+        <h1><b>Comments</b></h1>
+        <ul>
+          <li *ngFor="let cmnt of allcomments;let i=index"
+            [innerHTML]="cmnt.comment"></li>
+        </ul>
+        <editor
+          [(ngModel)]="comment.comment"
+          name="cmnt"
+          [init]="{
+          height: 200,
+          menubar: false,
+          plugins: [
+          'advlist autolink lists link image charmap print preview anchor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table paste code help wordcount'
+          ],
+          toolbar:
+          'undo redo | formatselect | bold italic backcolor | \
+          alignleft aligncenter alignright alignjustify | \
+          bullist numlist outdent indent | removeformat | help'
+          }"></editor><br>
+        <button mat-raised-button color="accent" type="submit"
+          class="rounded-pill">Add Comment</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</form>

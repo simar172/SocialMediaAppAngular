@@ -1,0 +1,24 @@
+
+<div class="dropdown ">
+  <button c mat-raised-button color="accent" style="margin-top: 6rem;z-index: 999;box-shadow: 0 4px
+    4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0,
+    0.19);" class="md btn
+    btn-lg  btns dropdown-toggle"
+    type="button"
+    data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fs-4">Categories</span>
+  </button>
+  <ul class="dropdown-menu">
+
+    <div>
+      <mat-chip [routerLink]="''"><button type="button" style="width: 20rem;"
+          class="dropdown-item text-uppercase text-center fs-5">All Post
+        </button>
+        <div *ngFor="let c of allCtgry" (click)="ctPost(c.id)">
+          <button mat-button color="accent" type="button" style="width: 20rem;"
+            class="dropdown-item text-uppercase text-center fs-5 mt-2">{{c.title}}
+          </button>
+        </div></mat-chip>
+    </div>
+  </ul>
+</div>

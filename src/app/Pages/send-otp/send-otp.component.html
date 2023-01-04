@@ -1,0 +1,32 @@
+<div class="pt-5 content-center ">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-5 mx-auto">
+        <div class="card " style="border-radius: 20px;">
+          <div class="card-body pt-5 ms-5">
+
+            <form (submit)="verifyEmail()">
+              <h1>Enter email for verification...</h1>
+              <p>
+                <label><i>Enter email</i></label><br>
+                <mat-form-field style="width: 80%;" appearance="outline">
+                  <mat-label>Enter Email ...</mat-label>
+                  <input matInput [(ngModel)]="email"
+                    name="email"
+                    placeholder="Enter email">
+                  <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                  <mat-hint>* Enter your RMI</mat-hint>
+                </mat-form-field>
+              </p><br>
+              <button type="submit" mat-raised-button color="primary"
+                style="width: 7rem;">Send OTP</button>
+            </form>
+          </div>
+          <p class="small-xl pt-3 text-center">
+            <span class="text-muted">Already a member?</span>
+            <a [routerLink]="'/login'">LogIn</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>

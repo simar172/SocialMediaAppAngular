@@ -1,0 +1,20 @@
+@media (max-width: 768px) {
+  .md {
+    margin-left: 20px;
+    width: 15rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .md {
+    /* padding: 4px 9px;
+    font-size: 90%;
+    line-height: 1.2; */
+    width: 10rem;
+  }
+}
+@media (min-width: 1180px) {
+  .md {
+    width: 20rem;
+  }
+}
