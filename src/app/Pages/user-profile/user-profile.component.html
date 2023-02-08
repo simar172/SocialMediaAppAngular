@@ -68,7 +68,9 @@
                     </li>
                   </ul>
                 </td>
+
               </tr>
+
               <tr>
                 <th scope="col">Following</th>
                 <td class="dropup ">
@@ -102,6 +104,13 @@
 
                   </ul>
                 </td>
+
+              </tr>
+              <tr>
+                <th scope="col">Private Account</th>
+                <td *ngIf="cuid!=user.id" >{{user.isPrivate===true?'PRIVATE':'PUBLIC'}} Account</td>
+                <td class=""><mat-slide-toggle
+                    (click)="changePrivacy(cuid)" *ngIf="cuid===user.id" [checked]="user.isPrivate">Slide me!</mat-slide-toggle></td>
               </tr>
             </tbody>
           </table>

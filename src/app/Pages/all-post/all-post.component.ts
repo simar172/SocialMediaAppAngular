@@ -6,6 +6,7 @@ import { LoginServiceService } from 'src/app/Services/LoginService/login-service
 import { BehaviorSubject } from 'rxjs';
 import { PostServiceService } from 'src/app/Services/PostService/post-service.service';
 import Swal from 'sweetalert2';
+import { CommentServiceService } from 'src/app/Services/CommentService/comment-service.service';
 
 @Component({
   selector: 'app-all-post',
@@ -13,11 +14,16 @@ import Swal from 'sweetalert2';
   styleUrls: ['./all-post.component.css'],
 })
 export class AllPostComponent implements OnInit {
+  comment: any = {
+    comment: '',
+  };
+  allcomments: any = [];
   puser: any = '';
   posts: any = '';
   userid: any = '';
   islogin: any = '';
   constructor(
+    private cservice: CommentServiceService,
     private allPost: AllPostService,
     private lserv: LikeServiceService,
     private loserv: LoginServiceService,
@@ -25,39 +31,47 @@ export class AllPostComponent implements OnInit {
   ) {}
 
   check: any = new BehaviorSubject<boolean>(false);
+  commentflag: any = new BehaviorSubject<boolean>(false);
   likedUsers: any = new Set();
   luser: any = [];
 
   ngOnInit(): void {
     this.userid = this.loserv.getUser()?.id;
-    console.log(this.userid);
 
     this.islogin = this.loserv.isLogin();
-    this.allPost
-      .getAllPost(this.userid ? this.userid : 0)
-      .subscribe((res: any) => {
-        this.posts = res.content;
-        console.log(this.posts);
+    this.allPost.getAllPost(this.userid).subscribe((res: any) => {
+      this.posts = res.content;
 
-        this.check.subscribe((l: any) => {
-          this.islogin = this.loserv.isLogin();
-          this.userid = this.loserv.getUser()?.id;
-          this.posts.map((p: any) => {
+      this.check.subscribe((l: any) => {
+        this.islogin = this.loserv.isLogin();
+        this.userid = this.loserv.getUser()?.id;
+        this.posts.map((p: any,index:any) => {
+          this.commentflag.subscribe(() => {
+          
+
+            this.allcomments[index]=p.li;
             this.lserv.getUsersOfLikedPost(p.id).subscribe((res: any) => {
               if (!this.likedUsers.has(res)) {
                 this.likedUsers.add(res);
               }
             });
-            this.lserv.getLikes(p.id).subscribe((l) => {
-              p['lkn'] = l;
-            });
-            this.loserv.isLogin() &&
-              this.lserv.isLiked(p.id, this.userid).subscribe((f) => {
-                p['lkd'] = f;
-              });
           });
+          this.lserv.getLikes(p.id).subscribe((l) => {
+            p['lkn'] = l;
+          });
+          this.loserv.isLogin() &&
+            this.lserv.isLiked(p.id, this.userid).subscribe((f) => {
+              p['lkd'] = f;
+            });
         });
       });
+    });
+  }
+  acomment(puid: any, uid: any) {
+    this.cservice.addComment(this.comment, puid, uid).subscribe((res) => {
+      this.commentflag.next(true);
+    });
+    console.log(this.allcomments);
   }
   addLike(uid: any, pid: any) {
     this.lserv.addLike(uid, pid).subscribe((res) => {

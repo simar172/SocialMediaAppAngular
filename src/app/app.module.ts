@@ -22,6 +22,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {
   AuthInterceptor,
   authInterceptorProvider,
@@ -130,6 +131,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     CategorywisePostComponent,
   ],
   imports: [
+    MatSlideToggleModule,
     MatTooltipModule,
     MatTreeModule,
     MatSidenavModule,

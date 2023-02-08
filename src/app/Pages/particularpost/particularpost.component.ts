@@ -31,7 +31,6 @@ export class ParticularpostComponent implements OnInit {
     });
     this.commentflag.subscribe(() => {
       this.pservice.getPostByPid(this.userRoute).subscribe((data: any) => {
-        console.log(data.li);
         this.allcomments = data.li;
         this.particularPost = data;
       });

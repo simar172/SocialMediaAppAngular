@@ -12,6 +12,7 @@ export class UserPostComponent implements OnInit {
   uid: any = '';
   post: any = [];
   flag: any = '';
+  cuid: any = '';
   constructor(
     private pserv: PostServiceService,
     private userv: LoginServiceService,
@@ -19,11 +20,12 @@ export class UserPostComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.cuid = this.userv.getUser().id;
     this.rtr.params.subscribe((p: Params) => {
       this.uid = p['uid'];
-    });
-    this.pserv.getPostsByUser(this.uid).subscribe((data: any) => {
-      this.post = data;
+      this.pserv.getPostsByUser(this.uid, this.cuid).subscribe((data: any) => {
+        this.post = data;
+      });
     });
   }
 }

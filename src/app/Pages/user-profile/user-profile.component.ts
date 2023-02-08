@@ -22,24 +22,21 @@ export class UserProfileComponent implements OnInit {
   ) {}
   check: any = new BehaviorSubject<boolean>(false);
   ngOnInit(): void {
-    // console.log(this.userv.getUser());
-    this.isLogin = this.userv.isLogin();
     this.cuid = this.userv.getUser()?.id;
+    this.isLogin = this.userv.isLogin();
     this.actir.params.subscribe((p: Params) => {
-      this.uid = p['uid'];
       this.check.subscribe((res: any) => {
+        this.uid = p['uid'];
         this.userv.getUserFollowers(this.uid).subscribe((res: any) => {
           this.flwr = res;
         });
         this.userv.getUserFollowing(this.uid).subscribe((data: any) => {
-          console.log(data);
           this.flwng = data;
         });
         this.userv.getParticularUser(this.uid).subscribe((res) => {
           this.user = res;
         });
         this.userv.isFollowing(this.cuid, this.uid).subscribe((res) => {
-          console.log(res);
           this.isflwng = res;
         });
       });
@@ -49,6 +46,12 @@ export class UserProfileComponent implements OnInit {
     this.userv.followUser(cuid, uid).subscribe((res) => {
       this.check.next(true);
       console.log(res);
+    });
+  }
+  changePrivacy(uid: any) {
+    this.userv.setPrivacy(uid).subscribe((res) => {
+      console.log(res);
+      this.check.next(true);
     });
   }
 }

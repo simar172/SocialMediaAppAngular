@@ -68,4 +68,7 @@ export class LoginServiceService {
   isFollowing(uid: any, profileId: any) {
     return this.http.get(`${baseUrl}/flw/user/isflwng/${uid}/${profileId}`);
   }
+  setPrivacy(uid: any) {
+    return this.http.put(`${baseUrl}/private/${uid}`, null);
+  }
 }
